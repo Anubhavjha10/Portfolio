@@ -1,0 +1,471 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Apply Inter font globally and set a dark background */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: rgb(2 2 2 / var(--tw-bg-opacity, 1)); /* Pure cosmic dark space background */
+    color: #f0f0f0; /* Light text color */
+    margin: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Prevent body scroll when side nav or modal is open */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* Custom scrollbar for a sleek look */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #080808;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1a1a1a;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 0, 127, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2a2a2a;
+    border: 1px solid rgba(255, 0, 127, 0.25);
+}
+
+/* Typing animation styles */
+.typing-animation::after {
+    content: '|';
+    animation: blink-caret .75s step-end infinite;
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #FF69B4; } /* Cursor color - Lighter Pink */
+}
+
+/* Glow effect for social and skill icons */
+.icon-glow-effect {
+    transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.icon-glow-effect:hover {
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.6); /* Pink glow */
+    background-color: #3a3a3a; /* Slightly lighter background on hover */
+}
+
+/* Animated Hamburger Button Styles */
+.hamburger-menu {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background: none;
+    z-index: 100;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #f0f0f0; /* White lines */
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger-menu.open span:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+}
+
+.hamburger-menu.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.open span:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* Side Navigation Styles */
+.side-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px; /* Side nav width */
+    height: 100%;
+    background-color: #1a1a1a; /* Side nav background */
+    transform: translateX(100%); /* Initially off-screen */
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000; /* On top */
+    padding: 2rem;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.side-nav.open {
+    transform: translateX(0); /* Slide in when open */
+}
+
+.side-nav .close-button {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: #f0f0f0;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.side-nav nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem; /* Space below close button */
+}
+
+.side-nav nav a {
+    color: #f0f0f0;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.side-nav nav a:hover {
+    color: #ff007f; /* Pink on hover */
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Above side nav */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #2a2a2a; /* Modal background */
+    padding: 2rem;
+    border-radius: 0.75rem; /* Rounded corners */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    color: #f0f0f0;
+}
+
+.modal-content .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: #f0f0f0;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Card Hover Styles (Service, Portfolio, Testimonial, Certificate) */
+.card-hover-effect {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+
+.card-hover-effect:hover {
+    transform: translate3d(0, -5px, 0) scale(1.02); /* Lift and slightly scale with GPU acceleration */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 0, 127, 0.4); /* Larger shadow with pink glow */
+}
+
+/* Specific icon colors for skills */
+.html5 { color: #E44D26; }
+.css3 { color: #264DE4; }
+.javascript { color: #F7DF1E; }
+.c-lang { color: #00599C; }
+.cplusplus { color: #659AD2; } /* C++ blue */
+.python { color: #3776AB; }
+.github { color: #F0F0F0; } /* White for GitHub */
+.kali-linux { color: #557C94; } /* Kali Linux grey-blue */
+.bash { color: #4EAA25; } /* Greenish for Bash */
+.wordpress { color: #21759B; } /* WordPress blue */
+.shopify { color: #95BF47; } /* Shopify green */
+.google-sites { color: #4285F4; } /* Google blue */
+.tailwind { color: #38B2AC; } /* Tailwind Teal */
+.pentest { color: #dc3545; } /* Red for pentest */
+
+
+/* Scroll Animation Styles */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95); /* Changed to slide from bottom and scale */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* Increased transition duration */
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1); /* Reset transform to original position and scale */
+}
+
+/* Best Skill On - Hover Text */
+.skill-text-on-hover {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    bottom: -1.5rem; /* Position below the icon */
+    font-size: 0.75rem; /* text-xs */
+    color: #f0f0f0; /* White text */
+    white-space: nowrap; /* Prevent text wrapping */
+    pointer-events: none; /* Ensure text doesn't block hover on icon */
+}
+
+.skill-icon-container:hover .skill-text-on-hover {
+    opacity: 1;
+}
+
+/* Form submission message styles */
+#form-message {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 600;
+}
+#form-message.success {
+    background-color: #28a745; /* Green */
+    color: #fff;
+}
+#form-message.error {
+    background-color: #dc3545; /* Red */
+    color: #fff;
+}
+
+/* Mobile Image Frame for About Section */
+@media (max-width: 767px) { /* Apply only on screens smaller than md breakpoint */
+    .about-image-frame {
+        border: 3px solid #ff007f; /* Pink border */
+        box-shadow: 0 0 0 5px rgba(255, 0, 127, 0.3), /* Inner glow */
+                    0 0 0 10px rgba(255, 0, 127, 0.1); /* Outer subtle glow */
+        padding: 5px; /* Space between border and image */
+        border-radius: 0.75rem; /* Match image rounded-xl */
+        display: inline-block; /* To contain the image properly */
+        /* New glowing effect on hover for mobile frame */
+        transition: box-shadow 0.3s ease-in-out;
+    }
+    .about-image-frame:hover {
+        box-shadow: 0 0 0 5px rgba(255, 0, 127, 0.6), /* Stronger inner glow */
+                    0 0 0 15px rgba(255, 0, 127, 0.4), /* Stronger outer glow */
+                    0 0 20px rgba(255, 0, 127, 0.8); /* Even brighter, larger glow */
+    }
+    .about-image-frame img {
+        border-radius: 0.5rem; /* Slightly smaller border radius for inner image */
+    }
+}
+/* Dynamic Role Styling */
+#dynamic-role {
+    color: #87CEEB; /* Sky Blue color for dynamic text */
+    /* Tailwind classes will handle font size: text-xl md:text-2xl */
+}
+/* Desktop Navigation Link Font Size Adjustment */
+#main-nav-desktop a {
+    font-size: 1.125rem; /* text-lg */ /* Reverted to original size */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+/* Dropdown menu specific styling */
+#main-nav-desktop .dropdown-menu {
+    min-width: max-content; /* Ensure dropdown content doesn't wrap */
+    top: 100%; /* Position directly below the button */
+    padding-top: 0.5rem; /* Add some padding top to make hover more forgiving */
+}
+
+/* Scroll to Top Button Styles */
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff007f; /* Pink background */
+    color: white;
+    border: none;
+    border-radius: 50%; /* Circular button */
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0; /* Initially hidden */
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.2s ease-in-out;
+    z-index: 999; /* Ensure it's above other content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#scrollToTopBtn.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#scrollToTopBtn:hover {
+    transform: translateY(-3px); /* Slight lift on hover */
+    background-color: #e60073; /* Darker pink on hover */
+}
+
+/* Footer Social Icons Styling */
+.footer-social-icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.footer-social-icon {
+    width: 36px; /* Smaller size for footer icons */
+    height: 36px;
+    background-color: #2a2a2a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f0f0f0;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.footer-social-icon:hover {
+    transform: translateY(-3px);
+    background-color: #3a3a3a;
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.5); /* Pink glow on hover */
+    color: #ff007f; /* Pink icon on hover */
+}
+
+.footer-social-text {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    bottom: -1.2rem; /* Position below the icon */
+    font-size: 0.65rem; /* text-xs equivalent */
+    color: #f0f0f0;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.footer-social-icon-container:hover .footer-social-text {
+    opacity: 1;
+}
+
+/* Base Button Style */
+.animated-btn {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border: none;
+    padding: 0.75rem 2rem; /* Tailwind py-3 px-8 equivalent */
+    border-radius: 9999px; /* Tailwind rounded-full equivalent */
+    font-weight: 600; /* Tailwind font-semibold equivalent */
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tailwind shadow-lg equivalent */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background-color: #ff007f; /* Default pink background */
+}
+
+.animated-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Shimmer Animation */
+.shimmer-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: none; /* Disable transition on shimmer for instant effect */
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Downloading/Sending Button Specific Styles (for visual feedback) */
+.processing-btn { /* Renamed from downloading-btn for broader use */
+    background-color: #28a745; /* Greenish during processing */
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Form Submission Message */
+#form-message {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-weight: 600;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+#form-message.show {
+    opacity: 1;
+    visibility: visible;
+}
+#form-message.success {
+    background-color: #28a745; /* Green */
+    color: #fff;
+}
+#form-message.error {
+    background-color: #dc3545; /* Red */
+    color: #fff;
+}
+
+/* Futuristic Boot Screen Styles */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-start infinite;
+}
+
+.glow-pink {
+  text-shadow: 0 0 10px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4);
+}
+
+.glow-green {
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.6), 0 0 20px rgba(74, 222, 128, 0.4);
+}
+
